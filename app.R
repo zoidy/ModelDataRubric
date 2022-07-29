@@ -159,8 +159,10 @@ ui <- fluidPage(
                 could be a Class 1 or 3 based on which descriptor you are looking at, you can separate the
                 workflow into logical sections and then classify each section separately.
             "),
-            p("See the ", a(href="https://modeldatarcn.github.io/rubrics-worksheets/Rubric-Instructions-and-Use-Cases.pdf","instructions"), "for more information"),
-            p(a(href="https://modeldatarcn.github.io","https://modeldatarcn.github.io")),
+            p("See the ", a(href="https://modeldatarcn.github.io/rubrics-worksheets/Rubric-Instructions-and-Use-Cases.pdf","instructions"), 
+              "and", a(href="https://modeldatarcn.github.io","https://modeldatarcn.github.io"), 
+              "for more information"),
+            p(a(href="https://github.com/zoidy/ModelDataRubric","Source code")),
             build_nav(first = T)
         ),
         screen(
@@ -226,7 +228,8 @@ ui <- fluidPage(
                 tags$li("Preserve and provide access to simulation workflow configuration and code components"),
                 tags$li("See Use Case 3"),
             ),
-            p(a(href="https://modeldatarcn.github.io/rubrics-worksheets/Rubric-Instructions-and-Use-Cases.pdf","Use Cases")),
+            br(),
+            p(a(href="https://modeldatarcn.github.io/rubrics-worksheets/Rubric-Instructions-and-Use-Cases.pdf","Use cases reference")),
             build_nav(last = T)
         )
     ),
