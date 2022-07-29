@@ -11,9 +11,21 @@ library(shiny)
 library(shinyglide)
 library(shinyWidgets)
 library(readxl)
+library(httr)
 
-data <- read_excel("Descriptor-classifications-worksheet-v2.0.xlsx")
+##########################
+# data
+##########################
 
+GET("https://github.com/zoidy/ModelDataRubric/raw/main/Descriptor-classifications-worksheet-v2.0.xlsx",
+    write_disk("rubric.xlsx", overwrite = TRUE))
+data <- read_excel("rubric.xlsx")
+file.remove("rubric.xlsx")
+
+
+##########################
+# UI - variables and funcs
+##########################
 numqs <<- 0
 
 controls <- tags$div(
@@ -116,7 +128,9 @@ build_nav <- function(first = FALSE, last = FALSE) {
     nav <- tagAppendChildren(p(br()),nav,br())
 }
 
-
+##########################
+# UI - shiny
+##########################
 ui <- fluidPage(
     tags$head(
         tags$style(css)
@@ -218,7 +232,9 @@ ui <- fluidPage(
     ),
 )
 
-# Define server logic
+##########################
+# Server
+##########################
 server <- function(input, output, session) {
     
     result <- reactiveVal(0)
