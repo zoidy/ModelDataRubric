@@ -222,7 +222,7 @@ ui <- fluidPage(
                 tags$li("See Use Case 2"),
             ),
             br(),
-            p(strong("Rubric Total Weighted Score between 48 and 72")),
+            p(strong("Rubric Total Weighted score > 72")),
             tags$ul(
                 tags$li("Preserve the majority simulation workflow outputs"),
                 tags$li("Preserve and provide access to simulation workflow configuration and code components"),
@@ -260,9 +260,13 @@ server <- function(input, output, session) {
         # Calculate the score on every event and update the reactive variable for display
         score <- 0
         for(i in seq(numqs)) {
-            q_vals <- strsplit(input[[paste0("Q",i)]],":")
-            score <- score + prod(as.numeric(q_vals[[1]]))
-            print(paste(i,prod(as.numeric(q_vals[[1]]))))
+            q_vals <- lapply(strsplit(input[[paste0("Q",i)]],":"), as.numeric)
+            if(q_vals[[1]][1] == 1) {
+              score <- score + q_vals[[1]][1]
+            } else {
+              score <- score + prod(q_vals[[1]])
+            }
+            print(paste(i,prod(q_vals[[1]])))
         }
         print(paste("score:", score))
         result(score)
